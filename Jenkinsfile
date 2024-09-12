@@ -14,7 +14,7 @@ pipeline {
                 sh 'docker login -u ${USER} -p ${PASS}'
                 sh 'docker push ${USER}/nodejs-image-yat237:v1.${BUILD_NUMBER}'
                 // sh 'docker rm -f $(docker ps -aq)'
-                sh 'docker run -d -p 3000:3000 ${USER}/nodejs-iamge-yat225:v1.${BUILD_NUMBER}'
+                sh 'docker run -d -p 3000:3000 ${USER}/nodejs-image-yat237:v1.${BUILD_NUMBER}'
                 }
             }
         }
