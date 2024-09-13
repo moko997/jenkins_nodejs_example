@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label 'slave' }
 
     stages {
         stage('prep') {
@@ -11,8 +11,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId:"docker",usernameVariable:"USER",passwordVariable:"PASS")]){
                 sh 'docker build . -f dockerfile -t ${USER}/nodejs-image-yat237:v1.${BUILD_NUMBER}'
-                sh 'docker login -u ${USER} -p ${PASS}'
-                sh 'docker push ${USER}/nodejs-image-yat237:v1.${BUILD_NUMBER}'
+                //sh 'docker login -u ${USER} -p ${PASS}'
+                // sh 'docker push ${USER}/nodejs-image-yat237:v1.${BUILD_NUMBER}'
                 // sh 'docker rm -f $(docker ps -aq)'
                 sh 'docker run -d -p 3000:3000 ${USER}/nodejs-image-yat237:v1.${BUILD_NUMBER}'
                 }
